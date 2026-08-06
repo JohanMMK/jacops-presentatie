@@ -183,6 +183,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 @media (max-width:960px){ .belofte{grid-template-columns:1fr} .edrive .ed-troeven{grid-template-columns:1fr} }
 .rapport-dl{display:inline-block;color:#ffb3ab;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #5a3a38;border-radius:4px;padding:9px 14px;background:#2a1f1e;margin-top:4px}
 .rapport-dl:hover{border-color:var(--jc-red);color:#fff}
+.edrive-badge{position:absolute;top:52px;right:64px;height:24px;width:120px;background:url("data:image/png;base64,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") no-repeat right center;background-size:contain;opacity:.95;z-index:6;pointer-events:none}
 </style>
 </head>
 <body>
@@ -260,7 +261,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
       <div class="filmtitel">Kan ik beter onderhandelen?</div>
       <div class="oneliner">Probleem, oplossing en wat je terugkrijgt — met de cijfers voor een concreet dossier.</div>
       <div class="opent"><h4>Het rapport</h4>
-        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-1-contract.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-1-contract.pdf" target="_blank" rel="noopener">&#128196; Open het volledige rapport (PDF, nieuwe tab)</a>
       </div>
     </div>
   </div>
@@ -303,7 +304,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
       <div class="filmtitel">Kan ik meer verdienen aan mijn injectie?</div>
       <div class="oneliner">Meer halen uit je injectie met slimme sturing — en het inzicht om te onderhandelen.</div>
       <div class="opent"><h4>Het rapport</h4>
-        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-2-solaractive.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-2-solaractive.pdf" target="_blank" rel="noopener">&#128196; Open het volledige rapport (PDF, nieuwe tab)</a>
       </div>
     </div>
   </div>
@@ -346,7 +347,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
       <div class="filmtitel">Kan ik met mijn aansluiting meer besparen of verdienen?</div>
       <div class="oneliner">Batterij-instap, exacte inschatting via de tekentool, en een groeipad op je eigen ritme.</div>
       <div class="opent"><h4>Het rapport</h4>
-        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-3-batteryactive.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-3-batteryactive.pdf" target="_blank" rel="noopener">&#128196; Open het volledige rapport (PDF, nieuwe tab)</a>
       </div>
     </div>
   </div>
@@ -354,6 +355,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 
 <!-- 6 FILM 4 -->
 <section class="slide donker film" data-titel="Film 4" data-video="v4">
+  <i class="edrive-badge"></i>
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 04 van 06 — mensen &amp; kilometers</div></div>
   <div class="filmwrap">
     <div class="filmvideo">
@@ -378,6 +380,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 
 <!-- DUIDING VIDEO 4 -->
 <section class="slide donker film" data-titel="Duiding 4" data-video="dv4">
+  <i class="edrive-badge"></i>
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Duiding · Vraag 4</div></div>
   <div class="filmwrap">
     <div class="filmvideo">
@@ -389,14 +392,37 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
       <div class="filmtitel">Kan ik de kost per km verlagen?</div>
       <div class="oneliner">Slim laadplein + batterij, ingetekend kabeltracé, uitgevoerd door E+Drive.</div>
       <div class="opent"><h4>Het rapport</h4>
-        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-4-eplusdrive.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+        <a class="rapport-dl" href="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/rapport-4-eplusdrive.pdf" target="_blank" rel="noopener">&#128196; Open het volledige rapport (PDF, nieuwe tab)</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUIDING-FILM · VIER VRAGEN, ÉÉN GROEIPAD (na duiding 4) -->
+<section class="slide donker film" data-titel="Groeipad" data-video="vg1">
+  <i class="edrive-badge"></i>
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Samenvatting · Vier vragen, één groeipad</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="vg1" controls preload="metadata" src="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/Vier-vragen-een-groeipad.mp4"></video>
+      <div class="kijkstatus" id="s-vg1"><span class="bol"></span><span class="txt">Samenvatting — bekijk volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">De vier vragen samen</div>
+      <div class="filmtitel">Vier vragen, één groeipad</div>
+      <div class="oneliner">Van contract tot kilometers: vier vragen die samen één groeipad vormen — uw eerste groeistap met Jacops, mét of zónder laadplein.</div>
+      <div class="opent"><h4>Wat deze film toont</h4><ul>
+        <li>De vier vragen naast elkaar: probleem, oplossing en wat u nodig hebt.</li>
+        <li>Snel en eenvoudig dankzij AI: inzichten uit +12.000 factuuranalyses.</li>
+        <li>Eén groeipad, op uw eigen ritme — enkel nog starten.</li>
+      </ul></div>
     </div>
   </div>
 </section>
 
 <!-- 7 FILM 5 -->
 <section class="slide donker film" data-titel="Film 5" data-video="v5">
+  <i class="edrive-badge"></i>
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 05 van 06 — vlootelektrificatie</div></div>
   <div class="filmwrap">
     <div class="filmvideo">
@@ -416,8 +442,29 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   </div>
 </section>
 
+<!-- DUIDING-FILM · TWEE SPOREN, VIER VRAGEN (na film 5 elektrificatie) -->
+<section class="slide donker film" data-titel="Twee sporen" data-video="vg2">
+  <i class="edrive-badge"></i>
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Hoe u antwoord krijgt · twee sporen</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="vg2" controls preload="metadata" src="https://cdn.jsdelivr.net/gh/JohanMMK/jacops-presentatie@main/Twee-sporen-vier-vragen.mp4"></video>
+      <div class="kijkstatus" id="s-vg2"><span class="bol"></span><span class="txt">Samenvatting — bekijk volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Gratis en direct · of offerte eerst</div>
+      <div class="filmtitel">Hoe u antwoord krijgt op de vier vragen</div>
+      <div class="oneliner">Twee sporen: spoor 1 gratis en direct (vraag 1 &amp; 2), spoor 2 offerte eerst (vraag 3 &amp; 4).</div>
+      <div class="opent"><h4>Financiering van de studies</h4>
+        <p style="font-size:14px;color:#d7d7d5;margin:0;max-width:none">Prefinanciering van de studiepartners Fluctus en EnergyVille op basis van een getekende studieofferte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 8 FILM 6 -->
 <section class="slide donker film" data-titel="Film 6" data-video="v6">
+  <i class="edrive-badge"></i>
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 06 van 06 — het manifest</div></div>
   <div class="filmwrap">
     <div class="filmvideo">
@@ -439,6 +486,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 
 <!-- 8b KLANTREIS -->
 <section class="slide donker film" data-titel="Klantreis" data-video="v7">
+  <i class="edrive-badge"></i>
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">De klantreis — stap voor stap</div></div>
   <div class="filmwrap">
     <div class="filmvideo">
