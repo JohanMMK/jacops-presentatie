@@ -1,1 +1,476 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JACOPS. — Meer mogelijk met hetzelfde net</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --jc-red:#E93323; --jc-red-bright:#FE0000; --jc-dark:#1D1D1B; --jc-ink:#3F3F3E;
+  --jc-grey:#6B6B6A; --jc-light:#F2F2F2; --jc-line:#DFDFDE; --jc-paper:#FFFFFF;
+  --jc-screen-bg:#F6F6F5; --jc-pos:#1E7F4F; --jc-warn:#B7791F;
+  --jc-font-head:'Oswald','Arial Narrow','Segoe UI',sans-serif;
+  --jc-font:'Carlito','Segoe UI',Calibri,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--jc-font);color:var(--jc-ink);background:var(--jc-dark);overflow:hidden;line-height:1.5}
 
+/* ---------- deck ---------- */
+.slide{position:absolute;inset:0;display:none;flex-direction:column;background:var(--jc-paper);
+  padding:48px 64px 84px 64px;overflow:auto}
+.slide.actief{display:flex;animation:in .45s ease}
+@keyframes in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.slide.donker{background:var(--jc-dark);color:#fff}
+
+/* ---------- kop ---------- */
+.hdr{display:flex;align-items:center;gap:16px;margin-bottom:26px;flex:0 0 auto}
+.logoblok{background:var(--jc-red);color:#fff;font-family:var(--jc-font-head);font-weight:700;
+  font-size:20px;letter-spacing:.5px;padding:8px 16px;border-radius:2px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:2.6px;color:var(--jc-grey);text-transform:uppercase}
+.donker .eyebrow{color:#9a9a98}
+h1{font-family:var(--jc-font-head);color:var(--jc-red);font-size:34px;line-height:1.12;
+  text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:16px}
+h2{font-family:var(--jc-font-head);color:var(--jc-red);font-size:20px;text-transform:uppercase;
+  letter-spacing:1px;font-weight:600;margin:18px 0 8px 0}
+.donker h1{color:#fff}
+.lead{font-size:18px;max-width:900px;margin-bottom:18px}
+.lead b{color:var(--jc-red)}
+.donker .lead b{color:#ff6a5c}
+p{margin-bottom:10px;max-width:900px}
+
+/* ---------- componenten ---------- */
+.kpis{display:flex;gap:22px;margin:18px 0;flex-wrap:wrap}
+.kpi{flex:1;min-width:200px;border-left:4px solid var(--jc-red);padding:6px 0 6px 16px}
+.kpi.groen{border-left-color:var(--jc-pos)}
+.kpi.goud{border-left-color:var(--jc-warn)}
+.kpi .t{font-family:var(--jc-font-head);font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.5px}
+.kpi .s{font-size:14px;color:var(--jc-grey);margin-top:4px}
+.donker .kpi .s{color:#b5b5b3}
+.sporen{margin:14px 0}
+.spoor{display:flex;gap:14px;margin:10px 0;align-items:flex-start;max-width:860px}
+.num{background:var(--jc-red);color:#fff;font-family:var(--jc-font-head);font-weight:600;min-width:30px;height:30px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 30px}
+.num.grijs{background:var(--jc-grey)}
+.spoor .tekst{font-size:15.5px;padding-top:3px}
+.spoor .tekst b{font-family:var(--jc-font-head);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.hero{background:var(--jc-red);color:#fff;border-radius:4px;text-align:center;padding:26px 30px;margin:20px 0;max-width:900px}
+.hero .big{font-family:var(--jc-font-head);font-size:26px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.hero .sub{font-size:15px;opacity:.94;margin-top:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:980px}
+.vak{border:1px solid var(--jc-line);border-top:4px solid var(--jc-red);border-radius:0 0 4px 4px;
+  padding:14px 18px;background:var(--jc-screen-bg)}
+.vak.pos{border-top-color:var(--jc-pos)}
+.vak h4{font-family:var(--jc-font-head);font-size:13px;text-transform:uppercase;letter-spacing:1.6px;
+  color:var(--jc-red);margin-bottom:8px;font-weight:600}
+.vak.pos h4{color:var(--jc-pos)}
+.vak ul{margin-left:18px}
+.vak li{margin-bottom:5px;font-size:14.5px}
+.donker .vak{background:#262624;border-color:#3a3a38}
+
+/* ---------- filmslides ---------- */
+.filmwrap{display:flex;gap:34px;flex:1;min-height:0;align-items:stretch}
+.filmvideo{flex:1.35;display:flex;flex-direction:column;min-width:0}
+video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;flex:1;min-height:0}
+.filminfo{flex:1;display:flex;flex-direction:column;min-width:280px}
+.filmtag{font-family:var(--jc-font-head);font-size:12px;letter-spacing:2.4px;color:var(--jc-red);
+  text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.filmtitel{font-family:var(--jc-font-head);font-size:26px;font-weight:600;text-transform:uppercase;margin-bottom:10px;line-height:1.15}
+.filminfo .oneliner{font-size:15.5px;color:var(--jc-grey);margin-bottom:14px}
+.donker .filminfo .oneliner{color:#b5b5b3}
+.opent{border:1px solid #3a3a38;border-left:4px solid var(--jc-red);background:#262624;
+  padding:14px 16px;border-radius:0 4px 4px 0;margin-top:auto}
+.opent h4{font-family:var(--jc-font-head);font-size:12px;letter-spacing:2px;color:#ff6a5c;
+  text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.opent ul{margin-left:16px}
+.opent li{font-size:14px;margin-bottom:4px}
+.kijkstatus{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:13.5px;color:var(--jc-grey)}
+.donker .kijkstatus{color:#b5b5b3}
+.kijkstatus .bol{width:11px;height:11px;border-radius:50%;background:var(--jc-warn);flex:0 0 11px}
+.kijkstatus.klaar .bol{background:var(--jc-pos)}
+.kijkstatus.klaar{color:var(--jc-pos)}
+
+/* ---------- navigatie ---------- */
+.nav{position:fixed;left:0;right:0;bottom:0;height:64px;background:var(--jc-dark);color:#fff;
+  display:flex;align-items:center;gap:18px;padding:0 26px;z-index:50;border-top:3px solid var(--jc-red)}
+.nav .merk{font-family:var(--jc-font-head);font-weight:700;letter-spacing:.5px;font-size:15px}
+.nav .merk span{color:var(--jc-red)}
+.voortgang{flex:1;display:flex;gap:6px;align-items:center}
+.stip{height:6px;flex:1;background:#3a3a38;border-radius:3px;transition:background .3s}
+.stip.gedaan{background:#8a8a88}
+.stip.nu{background:var(--jc-red)}
+.knop{font-family:var(--jc-font-head);font-weight:600;letter-spacing:1.2px;text-transform:uppercase;font-size:13px;
+  background:var(--jc-red);color:#fff;border:none;border-radius:2px;padding:10px 22px;cursor:pointer;transition:all .25s}
+.knop:hover:not(:disabled){background:var(--jc-red-bright)}
+.knop:disabled{background:#3a3a38;color:#8a8a88;cursor:not-allowed}
+.knop.stil{background:transparent;border:1px solid #5a5a58;color:#c5c5c3;padding:9px 16px}
+.knop.stil:hover{border-color:#fff;color:#fff;background:transparent}
+.slot{font-size:12px;color:#b7791f;letter-spacing:.4px;display:none;align-items:center;gap:6px}
+.slot.zichtbaar{display:flex}
+
+/* ---------- cover / slot ---------- */
+.cover{justify-content:center;align-items:flex-start}
+.cover .mega{font-family:var(--jc-font-head);font-weight:700;font-size:76px;line-height:1.02;
+  text-transform:uppercase;color:#fff;margin:18px 0 22px 0}
+.cover .mega .rood{color:var(--jc-red)}
+.cover .sub{font-size:19px;color:#c5c5c3;max-width:720px}
+.klikhint{margin-top:44px;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#8a8a88;
+  animation:puls 2.2s infinite}
+@keyframes puls{0%,100%{opacity:.45}50%{opacity:1}}
+.eindkaart{justify-content:center;align-items:center;text-align:center}
+.eindkaart .mega{font-family:var(--jc-font-head);font-weight:700;font-size:64px;color:var(--jc-red);text-transform:uppercase}
+.eindkaart .belofte{font-family:var(--jc-font-head);font-size:24px;color:#fff;text-transform:uppercase;
+  letter-spacing:1px;margin-top:10px;font-weight:600}
+.eindkaart .maatschappij{font-size:15px;color:#8a8a88;margin-top:14px;letter-spacing:1px;text-transform:uppercase}
+.footnote{position:absolute;bottom:76px;left:64px;right:64px;font-size:11.5px;color:var(--jc-grey)}
+.donker .footnote{color:#8a8a88}
+@media (max-width:960px){
+  .slide{padding:26px 24px 84px 24px}
+  .filmwrap{flex-direction:column}
+  .cover .mega{font-size:44px}
+  .grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- 0 COVER -->
+<section class="slide donker cover" data-titel="Start">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Marketing, sales &amp; operatie — vertrouwelijk voorstel</div></div>
+  <div class="mega">Meer mogelijk<br>met <span class="rood">hetzelfde net.</span></div>
+  <div class="sub">Hoe een ander verhaal over de aansluiting nieuwe business opent voor JACOPS.
+  Voor organisaties die vandaag vooruitgaan. En voor iedereen die morgen volgt.</div>
+  <div class="klikhint">Klik of gebruik de pijltjestoetsen om te starten &rarr;</div>
+</section>
+
+<!-- 1 HET OUDE VERHAAL -->
+<section class="slide" data-titel="Het oude verhaal">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Het vertrekpunt</div></div>
+  <h1>Het oude verhaal: de aansluiting als eindpunt</h1>
+  <p class="lead">Vijftig jaar lang was de aansluiting het <b>sluitstuk</b> van elk project: de klant vraagt, JACOPS graaft, trekt, sluit aan — en het project stopt bij de oplevering.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="t">Reactief</div><div class="s">De klant weet wat hij nodig heeft; JACOPS voert uit. Het gesprek begint pas als het lastenboek er al ligt.</div></div>
+    <div class="kpi"><div class="t">Eenmalig</div><div class="s">Na de oplevering eindigt de relatie. De volgende opdracht is een nieuwe aanbesteding, met nieuwe concurrenten.</div></div>
+    <div class="kpi"><div class="t">Vol net</div><div class="s">Steeds vaker is het antwoord: wachten. Op netverzwaring, op capaciteit, op de netbeheerder. Ambities botsen op de aansluiting.</div></div>
+  </div>
+  <p>In dat verhaal is JACOPS een betrouwbare uitvoerder — maar geen gesprekspartner over wat de klant <i>morgen</i> wil worden. En precies daar ontstaat vandaag de vraag.</p>
+</section>
+
+<!-- 2 DE OMSLAG -->
+<section class="slide donker" data-titel="De omslag">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">De strategische omslag</div></div>
+  <h1>Het nieuwe verhaal: de aansluiting als beginpunt</h1>
+  <p class="lead">Draai het verhaal om: <b>niet meer net vragen, maar meer mogelijk maken met hetzelfde net.</b> Wie zijn aansluiting begrijpt en slimmer gebruikt, creëert ruimte — voor zijn organisatie, zijn medewerkers en wie later volgt.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="t">De held</div><div class="s">De publieke of private organisatie die niet wacht, maar gericht beslist en haar medewerkers laat deelnemen.</div></div>
+    <div class="kpi"><div class="t">De belofte</div><div class="s">Een rendabele transitie die begint bij feiten: aansluiting, verbruik, productie, mobiliteit en investeringsritme.</div></div>
+    <div class="kpi"><div class="t">De motor</div><div class="s">JACOPS: meer dan 50 jaar infrastructuurervaring, eigen engineering, betrokken van ontwerp tot onderhoud.</div></div>
+  </div>
+  <div class="hero"><div class="big">De organisatie is het product.<br>Infrastructuur is de motor.</div>
+  <div class="sub">Elke stap in dit nieuwe verhaal opent een businesslijn die in het oude verhaal onzichtbaar bleef. De zes films hierna maken dat concreet — bekijk ze één voor één.</div></div>
+</section>
+
+<!-- 3 FILM 1 -->
+<section class="slide donker film" data-titel="Film 1" data-video="v1">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 01 van 06 — contract &amp; aansluiting</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v1" controls preload="metadata" src="JACOPS-01-Meer-Uit-Wat-Er-Al-Is.mp4"></video>
+      <div class="kijkstatus" id="s-v1"><span class="bol"></span><span class="txt">Bekijk de film volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Vooruitgang begint met begrijpen</div>
+      <div class="filmtitel">Meer uit wat er al is</div>
+      <div class="oneliner">Niet meer kabels, vermogen of kosten — eerst begrijpen wat er vandaag al is: aansluiting, verbruik, contract.</div>
+      <div class="opent"><h4>Welke business dit opent</h4><ul>
+        <li>Energie-audits en contract- &amp; aansluitingsoptimalisatie als laagdrempelig instapproduct.</li>
+        <li>Eén factuur en vier vragen openen elk gesprek — zonder drempel, zonder verkoopdruk.</li>
+        <li>De data uit de audit wordt de leadmotor voor elke volgende stap.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 FILM 2 -->
+<section class="slide donker film" data-titel="Film 2" data-video="v2">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 02 van 06 — productie &amp; injectie</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v2" controls preload="metadata" src="JACOPS-02-Energie-Die-Niet-Wacht.mp4"></video>
+      <div class="kijkstatus" id="s-v2"><span class="bol"></span><span class="txt">Bekijk de film volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Waarde ontstaat op het juiste moment</div>
+      <div class="filmtitel">Energie die niet wacht</div>
+      <div class="oneliner">De zon volgt geen contract. Waarde ontstaat wanneer productie, verbruik, opslag en laden als één systeem worden gestuurd.</div>
+      <div class="opent"><h4>Welke business dit opent</h4><ul>
+        <li>PV-installaties, omvormers en injectiebeheer op bedrijfsdaken en carports.</li>
+        <li>Energiemanagement (EMS): sturing van productie, verbruik en opslag als dienst.</li>
+        <li>Meer rendement uit bestaande installaties — een verkoopbaar verhaal bij elke audit.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 FILM 3 -->
+<section class="slide donker film" data-titel="Film 3" data-video="v3">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 03 van 06 — batterij &amp; vermogen</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v3" controls preload="metadata" src="JACOPS-03-Ruimte-Maken.mp4"></video>
+      <div class="kijkstatus" id="s-v3"><span class="bol"></span><span class="txt">Bekijk de film volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Wachten bouwt geen toekomst</div>
+      <div class="filmtitel">Ruimte maken</div>
+      <div class="oneliner">Een batterij bewaart niet alleen energie — ze bewaart mogelijkheden. Ze vangt pieken op en brengt productie en verbruik samen.</div>
+      <div class="opent"><h4>Welke business dit opent</h4><ul>
+        <li>Batterijsystemen: ontwerp, plaatsing, onderhoud — berekenbaar rendabel.</li>
+        <li>Peak shaving en capaciteitsbeheer als antwoord op het "volle net".</li>
+        <li>Projecten die vandaag "moeten wachten" worden alsnog realiseerbaar — met JACOPS.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 FILM 4 -->
+<section class="slide donker film" data-titel="Film 4" data-video="v4">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 04 van 06 — mensen &amp; kilometers</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v4" controls preload="metadata" src="JACOPS-04-Duurzaamheid-Die-Je-Voelt.mp4"></video>
+      <div class="kijkstatus" id="s-v4"><span class="bol"></span><span class="txt">Bekijk de film volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Duurzaamheid leeft niet in een rapport</div>
+      <div class="filmtitel">Duurzaamheid die je voelt</div>
+      <div class="oneliner">Goedkopere kilometers voor de werknemer, slimmer vermogen voor de werkgever — zonder ingewikkelde handelingen.</div>
+      <div class="opent"><h4>Welke business dit opent</h4><ul>
+        <li>Werkplek- en thuisladen, laadpasbeheer en terugbetaling als één dienst.</li>
+        <li>Laden als employee benefit: de medewerker wordt ambassadeur van de transitie.</li>
+        <li>Terugkerende service-omzet per laadpunt in plaats van eenmalige plaatsing.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 FILM 5 -->
+<section class="slide donker film" data-titel="Film 5" data-video="v5">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 05 van 06 — vlootelektrificatie</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v5" controls preload="metadata" src="JACOPS-05-Alles-Wat-Rijdt-Verandert.mp4"></video>
+      <div class="kijkstatus" id="s-v5"><span class="bol"></span><span class="txt">Bekijk de film volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Vier ritmes, één richting</div>
+      <div class="filmtitel">Alles wat rijdt, verandert</div>
+      <div class="oneliner">Vlootelektrificatie begint niet bij het aantal laadpalen, maar bij voertuigen, routes, stilstand, energie en infrastructuur als één geheel.</div>
+      <div class="opent"><h4>Welke business dit opent</h4><ul>
+        <li>Depotinfrastructuur en laadstrategie per voertuigtype — van personenwagen tot zwaar vervoer.</li>
+        <li>Meerjarige elektrificatietrajecten met uitbreidingspad in plaats of losse installaties.</li>
+        <li>Bussen, vracht en logistiek: het zware segment waar weinig spelers thuis zijn.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 FILM 6 -->
+<section class="slide donker film" data-titel="Film 6" data-video="v6">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 06 van 06 — het manifest</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v6" controls preload="metadata" src="JACOPS-06-Hetzelfde-Net.mp4"></video>
+      <div class="kijkstatus" id="s-v6"><span class="bol"></span><span class="txt">Bekijk de film volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Manifest</div>
+      <div class="filmtitel">Hetzelfde net</div>
+      <div class="oneliner">Gemeente, ziekenhuis, fabriek en depot: elk hun ritme. Wanneer infrastructuur samenwerkt, ontstaat ruimte — voor wie vooropgaat én wie volgt.</div>
+      <div class="opent"><h4>Welke business dit opent</h4><ul>
+        <li>Collectieve infrastructuur: clusters, ankersites en lokale energy hubs per regio.</li>
+        <li>JACOPS als orkestrator tussen organisaties — een rol die niemand anders claimt.</li>
+        <li>Publieke ankersites maken vooruitgang zichtbaar; bedrijven in de buurt volgen.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8b KLANTREIS -->
+<section class="slide donker film" data-titel="Klantreis" data-video="v7">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">De klantreis — stap voor stap</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="v7" controls preload="metadata" src="JACOPS-07-Klantreis.mp4"></video>
+      <div class="kijkstatus" id="s-v7"><span class="bol"></span><span class="txt">Bekijk de uitleg volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Twee banen, één vliegwiel</div>
+      <div class="filmtitel">Zo werkt de klantreis</div>
+      <div class="oneliner">Baan A: de publieke entiteit stapt in zonder drempel en wordt zichtbare ankersite. Baan B: het bedrijf in de buurt ziet het werken en volgt. Samen vormen ze buurtclusters — met de medewerkers overal ondersteund.</div>
+      <div class="opent"><h4>Wat deze reis bewijst</h4><ul>
+        <li>Eén eerste stap, drie beloften: oplossing, snelheid &amp; eenvoud, beleving.</li>
+        <li>De publieke ankersite is de motor: zij overtuigt de buurt, klant maakt klant.</li>
+        <li>Elke stap opent de volgende businesslijn — tot en met het buurtcluster.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 VLIEGWIEL -->
+<section class="slide" data-titel="De machine">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">De commerciële machine</div></div>
+  <h1>Geen funnel die eindigt. Een vliegwiel dat buurten opent.</h1>
+  <p class="lead">Elke film voedt dezelfde beweging: van aandacht naar audit, van audit naar bewijs, van bewijs naar bouw — en van elke realisatie naar de volgende klant in de buurt.</p>
+  <div class="sporen">
+    <div class="spoor"><div class="num">1</div><div class="tekst"><b>Zien</b> — film, ankersite of partner opent de aandacht.</div></div>
+    <div class="spoor"><div class="num">2</div><div class="tekst"><b>Vragen</b> — één factuur en vier relevante vragen. Instappen zonder drempel.</div></div>
+    <div class="spoor"><div class="num">3</div><div class="tekst"><b>Bewijzen</b> — scenario, rendement en risico helder berekend.</div></div>
+    <div class="spoor"><div class="num">4</div><div class="tekst"><b>Beslissen</b> — gefaseerde roadmap op het tempo van de klant. Geen externe tijdsdruk.</div></div>
+    <div class="spoor"><div class="num">5</div><div class="tekst"><b>Bouwen</b> — engineering, uitvoering en service in eigen huis.</div></div>
+    <div class="spoor"><div class="num">6</div><div class="tekst"><b>Verbinden</b> — medewerkers, buren en clusters volgen. Het vliegwiel draait verder.</div></div>
+  </div>
+</section>
+
+<!-- 10 MARKETING/SALES/OPERATIE -->
+<section class="slide" data-titel="Organisatie">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Marketing, sales &amp; operatie</div></div>
+  <h1>Eén belofte aan de buitenkant. Een gedisciplineerde machine erachter.</h1>
+  <div class="grid2">
+    <div class="vak"><h4>Wat de klant ervaart</h4><ul>
+      <li>Instappen zonder drempel, zichtbaar bewijs op een ankersite.</li>
+      <li>Vier heldere vragen en studies; uitvoering, financiering en begeleiding als één pad.</li>
+      <li>Geen druk: de volgende stap staat klaar wanneer de organisatie klaar is.</li>
+    </ul></div>
+    <div class="vak pos"><h4>Wat achter de schermen gebeurt</h4><ul>
+      <li>Leadkwalificatie, rendementsberekening en interne opvolgingsdiscipline.</li>
+      <li>Overdracht aan sales, ontwerp, uitvoering, monitoring en cross-sell.</li>
+      <li>Wekelijkse actielijst, maandelijks dashboard, kwartaalroadmap.</li>
+    </ul></div>
+  </div>
+  <h2>Sturing: meten wat waarde creëert</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="t">Marketing</div><div class="s">Bereik binnen ICP, videovoltooiing, factuurstarts — bereiken we de juiste organisaties met het juiste verhaal?</div></div>
+    <div class="kpi"><div class="t">Sales</div><div class="s">Gekwalificeerde dossiers, studieconversie, salescycle — wordt aandacht omzet, met gezonde marge?</div></div>
+    <div class="kpi groen"><div class="t">Impact</div><div class="s">€/km, benutting aansluiting, stuurbaar kW — maken klanten aantoonbaar meer mogelijk met hetzelfde net?</div></div>
+  </div>
+</section>
+
+<!-- 11 ROADMAP + MODEL -->
+<section class="slide" data-titel="Roadmap & model">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Roadmap &amp; commercieel model</div></div>
+  <h1>Negentig dagen tot een werkende groeimachine</h1>
+  <div class="sporen">
+    <div class="spoor"><div class="num">1</div><div class="tekst"><b>Week 1-2 · Fundament</b> — merkarchitectuur, claims, juridische validatie, dataflow, rollen en nulmeting.</div></div>
+    <div class="spoor"><div class="num">2</div><div class="tekst"><b>Week 3-6 · Bouwen</b> — campagne, landingspagina's, CRM-flow, studies, scripts en sales enablement.</div></div>
+    <div class="spoor"><div class="num">3</div><div class="tekst"><b>Week 7-10 · Piloot</b> — eerste sector en regio, ankersite, accountlijst, opvolging en conversiemeting.</div></div>
+    <div class="spoor"><div class="num">4</div><div class="tekst"><b>Week 11-13 · Opschalen</b> — optimaliseren, partnerkanalen openen, herhaalbaar playbook vastleggen.</div></div>
+  </div>
+  <h2>Commercieel model — een gedeeld belang</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="t">&euro;45.000 eenmalig</div><div class="s">Strategie, merk- en campagneplatform, customer journey, website, CRM/salesflow, dashboard en playbook.</div></div>
+    <div class="kpi"><div class="t">&euro;10.000 / maand</div><div class="s">Campagnesturing, content, leadoperatie, sales enablement, rapportage en partneractivatie.</div></div>
+    <div class="kpi goud"><div class="t">5% commissie</div><div class="s">Op elke aan het platform toerekenbare verkoop. Omzetbasis en attributie contractueel vast te leggen.</div></div>
+  </div>
+  <div class="footnote">Exclusief mediabudget, externe stemacteur, draaidagen, licenties, reis- en productiekosten, btw en technische platformabonnementen. Scope en commissiegrondslag worden vóór start als bijlage bevestigd.</div>
+</section>
+
+<!-- 12 BESLISSING -->
+<section class="slide donker eindkaart" data-titel="Beslissing">
+  <div class="mega">JACOPS.</div>
+  <div class="belofte">Meer mogelijk met hetzelfde net.</div>
+  <div class="maatschappij">Voor wie vooropgaat. En iedereen die volgt.</div>
+  <div class="hero" style="max-width:760px;margin-top:40px">
+    <div class="big">Maak van de infrastructuurreputatie een groeiplatform</div>
+    <div class="sub">Start met één werksessie: scope, claimvalidatie, eerste sector, eerste regio en eerste ankersite.
+    Daarna staat elke volgende stap klaar wanneer JACOPS er klaar voor is.</div>
+  </div>
+  <div class="footnote" style="text-align:center;left:0;right:0">Vertrouwelijk voorstel — augustus 2026 · Bronbasis: JACOPS-marketingplan, projectvoorstel v2 en de zes campagnefilms</div>
+</section>
+
+<!-- NAVIGATIE -->
+<div class="nav">
+  <div class="merk">JACOPS<span>.</span></div>
+  <button class="knop stil" id="terug">&larr; Terug</button>
+  <div class="voortgang" id="voortgang"></div>
+  <div class="slot" id="slot">&#9679; Film nog niet volledig bekeken</div>
+  <button class="knop" id="verder">Verder &rarr;</button>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var idx = 0;
+  var bekeken = {};   // videoId -> true zodra 'ended'
+  var vg = document.getElementById('voortgang');
+  var knopV = document.getElementById('verder');
+  var knopT = document.getElementById('terug');
+  var slot = document.getElementById('slot');
+
+  slides.forEach(function(s,i){
+    var d = document.createElement('div');
+    d.className = 'stip'; d.title = s.dataset.titel || ('Slide '+(i+1));
+    vg.appendChild(d);
+  });
+  var stippen = Array.prototype.slice.call(vg.children);
+
+  function vereisteVideo(i){ return slides[i].dataset.video || null; }
+  function magVerder(){
+    var v = vereisteVideo(idx);
+    return !v || bekeken[v] === true;
+  }
+  function toon(i){
+    if(i<0 || i>=slides.length) return;
+    slides[idx].classList.remove('actief');
+    // pauzeer lopende video bij verlaten
+    var oud = vereisteVideo(idx);
+    if(oud){ var ve = document.getElementById(oud); if(ve && !ve.paused) ve.pause(); }
+    idx = i;
+    slides[idx].classList.add('actief');
+    stippen.forEach(function(d,j){
+      d.className = 'stip' + (j<idx ? ' gedaan' : '') + (j===idx ? ' nu' : '');
+    });
+    werkNavBij();
+    window.scrollTo(0,0);
+  }
+  function werkNavBij(){
+    knopT.style.visibility = idx===0 ? 'hidden' : 'visible';
+    var laatste = idx === slides.length-1;
+    knopV.style.visibility = laatste ? 'hidden' : 'visible';
+    var ok = magVerder();
+    knopV.disabled = !ok;
+    slot.classList.toggle('zichtbaar', !ok);
+  }
+  function verder(){ if(magVerder() && idx < slides.length-1) toon(idx+1); }
+  function terug(){ if(idx>0) toon(idx-1); }
+
+  knopV.addEventListener('click', verder);
+  knopT.addEventListener('click', terug);
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight' || e.key==='PageDown' || e.key===' ') { if(e.target.tagName!=='VIDEO'){ e.preventDefault(); verder(); } }
+    if(e.key==='ArrowLeft'  || e.key==='PageUp') { e.preventDefault(); terug(); }
+  });
+  // klikken op een slide (buiten video/knoppen) = verder
+  slides.forEach(function(s){
+    s.addEventListener('click', function(e){
+      if(e.target.closest('video') || e.target.closest('button') || e.target.closest('a')) return;
+      verder();
+    });
+  });
+  // gating: video moet volledig bekeken zijn
+  Array.prototype.slice.call(document.querySelectorAll('video')).forEach(function(v){
+    v.addEventListener('ended', function(){
+      bekeken[v.id] = true;
+      var st = document.getElementById('s-'+v.id);
+      if(st){ st.classList.add('klaar'); st.querySelector('.txt').textContent = 'Film bekeken — je kan verder'; }
+      werkNavBij();
+    });
+    // autoplay poging bij binnenkomen van de slide is bewust weggelaten: kijker start zelf
+  });
+  toon(0);
+})();
+</script>
+</body>
+</html>
