@@ -435,6 +435,11 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
     if(oud){ var ve = document.getElementById(oud); if(ve && !ve.paused) ve.pause(); }
     idx = i;
     slides[idx].classList.add('actief');
+    // Video op deze slide automatisch starten. Navigatie gebeurt via klik/toets
+    // (user-gesture), dus autoplay mét geluid is toegestaan. Faalt play() toch door
+    // browserbeleid, dan blijven de controls staan en start de kijker gewoon zelf.
+    var nieuw = vereisteVideo(idx);
+    if(nieuw){ var nv = document.getElementById(nieuw); if(nv){ var p = nv.play(); if(p && p.catch) p.catch(function(){}); } }
     stippen.forEach(function(d,j){
       d.className = 'stip' + (j<idx ? ' gedaan' : '') + (j===idx ? ' nu' : '');
     });
@@ -473,7 +478,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
       if(st){ st.classList.add('klaar'); st.querySelector('.txt').textContent = 'Film bekeken — je kan verder'; }
       werkNavBij();
     });
-    // autoplay poging bij binnenkomen van de slide is bewust weggelaten: kijker start zelf
+    // autoplay gebeurt in toon(): bij binnenkomen van een film-slide start de video vanzelf.
   });
   toon(0);
 })();
