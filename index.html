@@ -409,6 +409,11 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   var knopT = document.getElementById('terug');
   var slot = document.getElementById('slot');
 
+  // Doorklik-schakelaar: met ?manager=1 (of ?skip=1) in de URL mag men vrij
+  // vooruit zonder elke film volledig uit te kijken. De portal hangt deze
+  // parameter aan de tegel-link voor MANAGERS; verkopers krijgen ze niet.
+  var SKIP = /[?&](manager|skip)=1(?:&|$)/.test(location.search);
+
   slides.forEach(function(s,i){
     var d = document.createElement('div');
     d.className = 'stip'; d.title = s.dataset.titel || ('Slide '+(i+1));
@@ -418,6 +423,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 
   function vereisteVideo(i){ return slides[i].dataset.video || null; }
   function magVerder(){
+    if(SKIP) return true;              // manager: vrij doorklikken
     var v = vereisteVideo(idx);
     return !v || bekeken[v] === true;
   }
