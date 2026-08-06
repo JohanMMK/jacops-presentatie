@@ -132,6 +132,57 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   .cover .mega{font-size:44px}
   .grid2{grid-template-columns:1fr}
 }
+
+/* ---------- duiding-slides (na film 1-4) ---------- */
+.duiding{background:var(--jc-paper)}
+.duiding .studie{font-size:14px;color:var(--jc-grey);margin:-6px 0 14px}
+.duiding .studie b{color:var(--jc-ink)}
+.duiding .gratis{color:var(--jc-pos);font-weight:700}
+.duiding .prijs{color:var(--jc-warn);font-weight:700}
+.duiding .kpis{margin:6px 0 18px}
+.duiding .kpi{border-left:4px solid var(--jc-pos);background:var(--jc-screen-bg);border-radius:0 4px 4px 0;padding:12px 16px;min-width:210px}
+.duiding .kpi .v{font-family:var(--jc-font-head);font-weight:600;font-size:26px;color:var(--jc-pos);line-height:1.05}
+.duiding .kpi .l{font-size:13px;color:var(--jc-grey);margin-top:5px}
+.belofte{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:6px 0 18px}
+.bkaart{border:1px solid var(--jc-line);border-top:4px solid var(--jc-red);border-radius:0 0 4px 4px;padding:14px 16px;background:#fff}
+.bkaart:nth-child(2){border-top-color:var(--jc-warn)}
+.bkaart:nth-child(3){border-top-color:var(--jc-pos)}
+.bk-lbl{font-family:var(--jc-font-head);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--jc-red);font-weight:600;margin-bottom:7px}
+.bkaart:nth-child(2) .bk-lbl{color:var(--jc-warn)}
+.bkaart:nth-child(3) .bk-lbl{color:var(--jc-pos)}
+.bk-tx{font-size:14.5px;color:var(--jc-ink);line-height:1.45}
+.rapportbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px}
+/* E+Drive-blok (slide 4) */
+.edrive{border:1px solid #cfe6a8;border-left:4px solid #80C539;background:#f6fbee;border-radius:0 4px 4px 0;padding:16px 20px;max-width:1000px;margin:2px 0 18px}
+.edrive .ed-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.edrive .ed-logo{height:26px;width:auto;display:block}
+.edrive .ed-filiaal{font-size:12px;color:var(--jc-grey);letter-spacing:.3px}
+.edrive .ed-filiaal .jc{background:var(--jc-red);color:#fff;font-family:Arial;font-weight:900;font-size:12px;letter-spacing:-.5px;padding:2px 6px;border-radius:2px}
+.edrive .ed-slogan{color:#5a8f16;font-family:var(--jc-font-head);font-weight:600;font-size:18px;margin:10px 0 4px}
+.edrive .ed-intro{font-size:14px;color:var(--jc-ink);line-height:1.45;margin-bottom:10px}
+.edrive .ed-troeven{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;color:var(--jc-ink);line-height:1.4}
+.edrive .ed-troeven div{border-left:2px solid #80C539;padding-left:10px}
+/* staged reveal-animatie bij binnenkomst */
+@keyframes reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.slide.actief .r1{animation:reveal .5s .05s both}
+.slide.actief .r2{animation:reveal .5s .20s both}
+.slide.actief .r3{animation:reveal .5s .38s both}
+.slide.actief .r4{animation:reveal .6s .56s both}
+.slide.actief .r5{animation:reveal .5s .80s both}
+.slide.actief .r6{animation:reveal .5s 1.0s both}
+/* ---------- PDF-modal ---------- */
+.pdfmodal{position:fixed;inset:0;background:rgba(15,15,14,.72);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.pdfmodal.open{display:flex}
+.pdfbox{background:#fff;width:min(1100px,94vw);height:92vh;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.pdfbar{display:flex;align-items:center;gap:16px;background:var(--jc-dark);color:#fff;padding:10px 16px;flex:0 0 auto}
+.pdfbar .tt{font-family:var(--jc-font-head);font-weight:600;letter-spacing:.5px;font-size:14px;flex:1;text-transform:uppercase}
+.pdfbar a.ext{color:#c5c5c3;text-decoration:none;font-size:12.5px;border:1px solid #5a5a58;border-radius:3px;padding:6px 10px}
+.pdfbar a.ext:hover{color:#fff;border-color:#fff}
+.pdfbar button.x{background:var(--jc-red);color:#fff;border:none;border-radius:3px;width:32px;height:32px;font-size:16px;cursor:pointer}
+.pdfframe{border:0;flex:1;width:100%;background:#525659}
+@media (max-width:960px){ .belofte{grid-template-columns:1fr} .edrive .ed-troeven{grid-template-columns:1fr} }
+.rapport-dl{display:inline-block;color:#ffb3ab;text-decoration:none;font-weight:700;font-size:14px;border:1px solid #5a3a38;border-radius:4px;padding:9px 14px;background:#2a1f1e;margin-top:4px}
+.rapport-dl:hover{border-color:var(--jc-red);color:#fff}
 </style>
 </head>
 <body>
@@ -193,6 +244,28 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   </div>
 </section>
 
+
+
+
+<!-- DUIDING VIDEO 1 -->
+<section class="slide donker film" data-titel="Duiding 1" data-video="dv1">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Duiding · Vraag 1</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="dv1" controls preload="metadata" src="duiding-1-contract.mp4"></video>
+      <div class="kijkstatus" id="s-dv1"><span class="bol"></span><span class="txt">Duiding bij vraag 1 — bekijk volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Vraag 1 · Mijn contract</div>
+      <div class="filmtitel">Kan ik beter onderhandelen?</div>
+      <div class="oneliner">Probleem, oplossing en wat je terugkrijgt — met de cijfers voor een concreet dossier.</div>
+      <div class="opent"><h4>Het rapport</h4>
+        <a class="rapport-dl" href="rapport-1-contract.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 4 FILM 2 -->
 <section class="slide donker film" data-titel="Film 2" data-video="v2">
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 02 van 06 — productie &amp; injectie</div></div>
@@ -210,6 +283,28 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
         <li>Energiemanagement (EMS): sturing van productie, verbruik en opslag als dienst.</li>
         <li>Meer rendement uit bestaande installaties — een verkoopbaar verhaal bij elke audit.</li>
       </ul></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- DUIDING VIDEO 2 -->
+<section class="slide donker film" data-titel="Duiding 2" data-video="dv2">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Duiding · Vraag 2</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="dv2" controls preload="metadata" src="duiding-2-solaractive.mp4"></video>
+      <div class="kijkstatus" id="s-dv2"><span class="bol"></span><span class="txt">Duiding bij vraag 2 — bekijk volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Vraag 2 · Mijn productie</div>
+      <div class="filmtitel">Kan ik meer verdienen aan mijn injectie?</div>
+      <div class="oneliner">Meer halen uit je injectie met slimme sturing — en het inzicht om te onderhandelen.</div>
+      <div class="opent"><h4>Het rapport</h4>
+        <a class="rapport-dl" href="rapport-2-solaractive.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+      </div>
     </div>
   </div>
 </section>
@@ -235,6 +330,28 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   </div>
 </section>
 
+
+
+
+<!-- DUIDING VIDEO 3 -->
+<section class="slide donker film" data-titel="Duiding 3" data-video="dv3">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Duiding · Vraag 3</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="dv3" controls preload="metadata" src="duiding-3-batteryactive.mp4"></video>
+      <div class="kijkstatus" id="s-dv3"><span class="bol"></span><span class="txt">Duiding bij vraag 3 — bekijk volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Vraag 3 · Mijn aansluiting</div>
+      <div class="filmtitel">Kan ik met mijn aansluiting meer besparen of verdienen?</div>
+      <div class="oneliner">Batterij-instap, exacte inschatting via de tekentool, en een groeipad op je eigen ritme.</div>
+      <div class="opent"><h4>Het rapport</h4>
+        <a class="rapport-dl" href="rapport-3-batteryactive.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 6 FILM 4 -->
 <section class="slide donker film" data-titel="Film 4" data-video="v4">
   <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Film 04 van 06 — mensen &amp; kilometers</div></div>
@@ -252,6 +369,28 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
         <li>Laden als employee benefit: de medewerker wordt ambassadeur van de transitie.</li>
         <li>Terugkerende service-omzet per laadpunt in plaats van eenmalige plaatsing.</li>
       </ul></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- DUIDING VIDEO 4 -->
+<section class="slide donker film" data-titel="Duiding 4" data-video="dv4">
+  <div class="hdr"><div class="logoblok">JACOPS.</div><div class="eyebrow">Duiding · Vraag 4</div></div>
+  <div class="filmwrap">
+    <div class="filmvideo">
+      <video id="dv4" controls preload="metadata" src="duiding-4-eplusdrive.mp4"></video>
+      <div class="kijkstatus" id="s-dv4"><span class="bol"></span><span class="txt">Duiding bij vraag 4 — bekijk volledig om verder te gaan</span></div>
+    </div>
+    <div class="filminfo">
+      <div class="filmtag">Vraag 4 · Mijn mobiliteit</div>
+      <div class="filmtitel">Kan ik de kost per km verlagen?</div>
+      <div class="oneliner">Slim laadplein + batterij, ingetekend kabeltracé, uitgevoerd door E+Drive.</div>
+      <div class="opent"><h4>Het rapport</h4>
+        <a class="rapport-dl" href="rapport-4-eplusdrive.pdf" download>&#128196; Download het volledige rapport (PDF)</a>
+      </div>
     </div>
   </div>
 </section>
@@ -390,6 +529,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   <div class="footnote" style="text-align:center;left:0;right:0">Vertrouwelijk voorstel — augustus 2026 · Bronbasis: JACOPS-marketingplan, projectvoorstel v2 en de zes campagnefilms</div>
 </section>
 
+
 <!-- NAVIGATIE -->
 <div class="nav">
   <div class="merk">JACOPS<span>.</span></div>
@@ -460,6 +600,8 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
   knopV.addEventListener('click', verder);
   knopT.addEventListener('click', terug);
   document.addEventListener('keydown', function(e){
+    var mm=document.getElementById('pdfmodal');
+    if(mm && mm.classList.contains('open')){ if(e.key==='Escape'){ closePdf(); } return; }
     if(e.key==='ArrowRight' || e.key==='PageDown' || e.key===' ') { if(e.target.tagName!=='VIDEO'){ e.preventDefault(); verder(); } }
     if(e.key==='ArrowLeft'  || e.key==='PageUp') { e.preventDefault(); terug(); }
   });
