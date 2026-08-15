@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- jacops-presentatie/index.html — v1.1 — 2026-08-15 20:11 (Europe/Brussels) — vaste "← Mijn Fluctus"-terugknop in navbalk (cross-origin naar portal); gepatcht op de LIVE-versie -->
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
@@ -107,6 +108,9 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 .knop:disabled{background:#3a3a38;color:#8a8a88;cursor:not-allowed}
 .knop.stil{background:transparent;border:1px solid #5a5a58;color:#c5c5c3;padding:9px 16px}
 .knop.stil:hover{border-color:#fff;color:#fff;background:transparent}
+a.knop{text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.nav .thuis{flex:0 0 auto}
+@media (max-width:960px){ .nav .merk{display:none} }
 .slot{font-size:12px;color:#b7791f;letter-spacing:.4px;display:none;align-items:center;gap:6px}
 .slot.zichtbaar{display:flex}
 
@@ -603,6 +607,7 @@ video{width:100%;max-height:100%;background:#000;border-radius:4px;outline:none;
 
 <!-- NAVIGATIE -->
 <div class="nav">
+  <a class="knop stil thuis" href="https://fluctus-web-production.up.railway.app/portal.html" title="Terug naar Mijn Fluctus">&larr; Mijn Fluctus</a>
   <div class="merk">JACOPS<span>.</span></div>
   <button class="knop stil" id="terug">&larr; Terug</button>
   <div class="voortgang" id="voortgang"></div>
